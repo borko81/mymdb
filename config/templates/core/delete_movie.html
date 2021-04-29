@@ -2,4 +2,10 @@
 {% block title %}Delete - Moview {% endblock title %}
 {% block content %} 
 
+<form action="{% url 'movies:delete_movie' movies.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Потвърди изтриването" />
+</form>
+
+
 {% endblock content %}

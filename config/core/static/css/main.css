@@ -29,3 +29,14 @@
     padding-top: 5px;
     padding-right: 5px;
 }
+
+/* Css for edit delete nav bar */
+.edit_delete > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .edit_delete > ul > li {
+    display: inline;
+  }

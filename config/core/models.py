@@ -19,7 +19,7 @@ class Movie(models.Model):
     )
     runtime = models.PositiveIntegerField()
     website = models.URLField(blank=True)
-    image = models.ImageField(upload_to='images', blank=True)
+    image = models.ImageField(upload_to='images', blank=False)
 
     def __str__(self):
         return f"Title: {self.title}"

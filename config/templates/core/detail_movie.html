@@ -11,9 +11,13 @@
     <div class="main_span">
         <h2 class="h2_title">{{ movies.title }}</h2> <span class="my_right">Rated: {{ movies.get_rating_display }}</span>
     </div>
-    <p>Година: {{ movie.year }} - {{ movies.runtime }} минути</p>
+    <p>Година: {{ movies.year }} - {{ movies.runtime }} минути</p>
     <p>{{ movies.plot }}</p>
-    <a href="{{ movie.website }}" target="_blank">Website</a>
+    <a href="{{ movies.website }}" target="_blank">Към адреса...</a>
+    <hr>
+    <div class="edit_delete">
+        {% include 'core/edit_delete.html' %}
+    </div>
 </div>
 
 
