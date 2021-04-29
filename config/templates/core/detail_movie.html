@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Detail{% endblock title %}
+{% load static %}
+{% block content %} 
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock css %}
+
+<div>
+    <div class="main_span">
+        <h2 class="h2_title">{{ movies.title }}</h2> <span class="my_right">Rated: {{ movies.get_rating_display }}</span>
+    </div>
+    <p>Година: {{ movie.year }} - {{ movies.runtime }} минути</p>
+    <p>{{ movies.plot }}</p>
+    <a href="{{ movie.website }}" target="_blank">Website</a>
+</div>
+
+
+{% endblock content %}

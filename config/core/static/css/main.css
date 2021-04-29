@@ -7,10 +7,25 @@
 }
 
 .m_box {
-    background-color: #444;
+    background-color: #6c757d;
     color: #fff;
     border-radius: 5px;
     padding: 10px;
     font-size: 80%;
     width: 18rem;
+}
+
+.h2_title {
+    display: inline-block;
+}
+
+.main_span {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.my_right {
+    float: right;
+    padding-top: 5px;
+    padding-right: 5px;
 }
