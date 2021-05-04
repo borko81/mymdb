@@ -1,3 +1,7 @@
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
+from .forms import LoginForm
+
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from core.models import Movie
@@ -50,3 +54,22 @@ def movie_delete(request, m_id):
         movie.delete()
         return redirect('movies:all_movie')
     return render(request, 'core/delete_movie.html', context)
+
+# Login and register technic
+def user_login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            temp = form.cleaned_data
+            user = authenticate(request, username=temp['username'], password=temp['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('movies:all_movie')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    else:
+        form = LoginForm()
+    return render(request, 'core/login_page.html', {'form': form})

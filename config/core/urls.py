@@ -1,9 +1,12 @@
+from django.contrib import auth
+from django.contrib.auth import views as auth_views
 from django.urls import path
 from .views import (
     MovieDetail,
     MovieList,
     movie_create,
     movie_delete,
+    user_login,
 )
 app_name = 'movies'
 urlpatterns = [
@@ -12,4 +15,8 @@ urlpatterns = [
     path('create_movie/', movie_create, name='create_movie'),
     path('create_movie/<int:m_id>/', movie_create, name='create_movie'),
     path('delete/<int:m_id>/movie/', movie_delete, name='delete_movie'),
+
+    # Login and register urls's
+    path('login/', user_login, name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]

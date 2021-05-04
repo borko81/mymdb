@@ -16,3 +16,9 @@ class NewMovieForm(forms.ModelForm):
             'website': forms.DateInput(attrs={'class': 'form-control', 'type': 'text'}),
             'image': forms.FileInput(attrs={'class': 'form-control'}),
         }
+
+
+# Login form
+class LoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
