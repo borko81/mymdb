@@ -8,11 +8,15 @@
 
 {% block content %}
 
+{% if form.errors %}
+<p>Потребителското име или паролата не съвпадат. Опитаите пак</p>
+{% else %}
 <h2>Login Page</h2>
+{% endif %}
 <form action="" method="POST">
 {% csrf_token %}
     {{ form.as_p }}
 <input type="submit" value="Login" class="form-control btn btn-primary">
 </form>
-<a href="">Може да направите регистрация от тук...</a>
+<a href="{% url 'movies:registration' %}">Ако нямате регистрация може да я направите тук...</a>
 {% endblock content %}

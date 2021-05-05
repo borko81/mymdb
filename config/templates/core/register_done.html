@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Register Page{% endblock title %}
+
+{% block content %}
+
+<h1>Добре дошъл {{ new_user.first_name }}</h1>
+<p>Вашият акаунт е създаден успешно може да се логнете тук
+    <a href="{% url 'movies:login' %}">log in</a>
+</p>
+
+
+{% endblock %}

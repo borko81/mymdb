@@ -1,11 +1,13 @@
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
+
+from .forms import LoginForm, UserRegistrationForm
 
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView, CreateView
-from core.models import Movie
-from core.forms import NewMovieForm
+from core.models import Movie, Profile
+from core.forms import NewMovieForm, UserEditForm, ProfileEditForm
 
 
 def all_movie(request):
@@ -56,20 +58,52 @@ def movie_delete(request, m_id):
     return render(request, 'core/delete_movie.html', context)
 
 # Login and register technic
+
+
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             temp = form.cleaned_data
-            user = authenticate(request, username=temp['username'], password=temp['password'])
+            user = authenticate(
+                request, username=temp['username'], password=temp['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
                     return redirect('movies:all_movie')
                 else:
-                    return HttpResponse('Disabled account')
+                    # return HttpResponse('Disabled account')
+                    return redirect('movies:login')
             else:
-                return HttpResponse('Invalid login')
+                # return HttpResponse('Invalid login')
+                return redirect('movies:login')
     else:
         form = LoginForm()
     return render(request, 'core/login_page.html', {'form': form})
+
+
+def registration(request):
+    user_form = UserRegistrationForm(request.POST or None)
+    if user_form.is_valid():
+        new_user = user_form.save(commit=False)
+        new_user.set_password(user_form.cleaned_data['password'])
+        new_user.save()
+        Profile.objects.create(user=new_user)
+        return render(request, 'core/register_done.html', {'new_user': new_user})
+    return render(request, 'core/register.html', {'user_form': user_form})
+
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(
+            instance=request.user.profile, data=request.POST, files=request.FILES)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(request, 'account/edit.html', {'user_form': user_form, 'profile_form': profile_form})

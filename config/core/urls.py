@@ -7,6 +7,7 @@ from .views import (
     movie_create,
     movie_delete,
     user_login,
+    registration,
 )
 app_name = 'movies'
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
     # Login and register urls's
     path('login/', user_login, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('register/', registration, name='registration')
 ]
