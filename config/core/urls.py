@@ -8,6 +8,7 @@ from .views import (
     movie_delete,
     user_login,
     registration,
+    edit,
 )
 app_name = 'movies'
 urlpatterns = [
@@ -18,7 +19,8 @@ urlpatterns = [
     path('delete/<int:m_id>/movie/', movie_delete, name='delete_movie'),
 
     # Login and register urls's
-    path('login/', user_login, name='login'),
+    path('login/', user_login, name='user_login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('edit/', edit, name='edit'),
     path('register/', registration, name='registration')
 ]

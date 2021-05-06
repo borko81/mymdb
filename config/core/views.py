@@ -79,7 +79,7 @@ def user_login(request):
                 return redirect('movies:login')
     else:
         form = LoginForm()
-    return render(request, 'core/login_page.html', {'form': form})
+    return render(request, 'login_register/login_page.html', {'form': form})
 
 
 def registration(request):
@@ -89,11 +89,11 @@ def registration(request):
         new_user.set_password(user_form.cleaned_data['password'])
         new_user.save()
         Profile.objects.create(user=new_user)
-        return render(request, 'core/register_done.html', {'new_user': new_user})
-    return render(request, 'core/register.html', {'user_form': user_form})
+        return render(request, 'login_register/register_done.html', {'new_user': new_user})
+    return render(request, 'login_register/register.html', {'user_form': user_form})
 
 
-@login_required
+@login_required(login_url='/login')
 def edit(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
@@ -103,7 +103,8 @@ def edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            return redirect('movies:all_movie')
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
-    return render(request, 'account/edit.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'login_register/edit_user_profile.html', {'user_form': user_form, 'profile_form': profile_form})

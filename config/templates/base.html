@@ -16,9 +16,28 @@
 <body>
 
     <div class="container">
-        <div class="py-5 text-left">
-            <h2>ФИЛМОВ КАТАЛОГ</h2>
+        <div class="d-flex justify-content-between">
+            <div>
+                <h2>ФИЛМОВ КАТАЛОГ</h2>
+            </div>
             <!-- добре дошли {{ request.user }}. Използване https : {{ request.is_secure|yesno }}  -->
+        
+            <div class="ml-auto">
+                {% if user.is_authenticated %}
+                <div class="d-flex">
+                    <a href="{% url 'movies:edit' %}" class="my-0">
+                        <h6 class="my-0">Edit Profile</h6>
+                    </a>&nbsp;&nbsp;
+                    <a href="{% url 'movies:logout' %}?next=/" class="my-0">
+                        <h6 class="my-0">Logout {{ user }}</h6>
+                    </a>
+                </div>
+            {% else %}
+                <a href="{% url 'movies:user_login' %}" class="my-0">
+                    <h6 class="my-0">Login</h6>
+                </a>
+            {% endif %}
+            </div>
         </div>
 
         <div class="row">
