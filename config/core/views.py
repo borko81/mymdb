@@ -10,10 +10,6 @@ from core.models import Movie, Profile
 from core.forms import NewMovieForm, UserEditForm, ProfileEditForm
 
 
-def all_movie(request):
-    return render(request, 'core/all_movies.html')
-
-
 class MovieList(ListView):
     """ Return all movies from database """
     template_name = 'core/all_movies.html'
