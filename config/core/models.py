@@ -26,7 +26,7 @@ class Movie(models.Model):
         return f"Title: {self.title}"
 
 
-# UserPRofile edit
+# UserProfile edit
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

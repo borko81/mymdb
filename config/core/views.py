@@ -29,29 +29,37 @@ def movie_create(request, m_id=None):
         Use 2 in 1 for create and edit new movie
         for this use and two url's
     """
-    context = {}
-    movies = None
-    if m_id:
-        movies = Movie.objects.get(id=m_id)
+    if request.user.is_authenticated:
+        """
+            If user is login get control for create, delete and edit
+            else redirect to login page
+        """
+        context = {}
+        movies = None
+        if m_id:
+            movies = Movie.objects.get(id=m_id)
 
-    form = NewMovieForm(request.POST or None,
-                        request.FILES or None, instance=movies)
-    if form.is_valid():
-        form.save()
-        form = NewMovieForm()
-        return redirect('movies:all_movie')
-    context['form'] = form
-    return render(request, 'core/new_movie.html', context)
+        form = NewMovieForm(request.POST or None,
+                            request.FILES or None, instance=movies)
+        if form.is_valid():
+            form.save()
+            form = NewMovieForm()
+            return redirect('movies:all_movie')
+        context['form'] = form
+        return render(request, 'core/new_movie.html', context)
+    return redirect('movies:user_login')
 
 
 def movie_delete(request, m_id):
-    context = {}
-    movie = get_object_or_404(Movie, id=m_id)
-    context['movies'] = movie
-    if request.method == 'POST':
-        movie.delete()
-        return redirect('movies:all_movie')
-    return render(request, 'core/delete_movie.html', context)
+    if request.user.is_authenticated:
+        context = {}
+        movie = get_object_or_404(Movie, id=m_id)
+        context['movies'] = movie
+        if request.method == 'POST':
+            movie.delete()
+            return redirect('movies:all_movie')
+        return render(request, 'core/delete_movie.html', context)
+    return redirect('movies:user_login')
 
 # Login and register technic
 
@@ -79,6 +87,11 @@ def user_login(request):
 
 
 def registration(request):
+    """
+        Register view.
+        After successfully create user, too create profile, this profile used to
+        attach info to user profile!
+    """
     user_form = UserRegistrationForm(request.POST or None)
     if user_form.is_valid():
         new_user = user_form.save(commit=False)
