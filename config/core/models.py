@@ -1,5 +1,5 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 
 
 class Movie(models.Model):
@@ -35,3 +35,15 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return 'Profile for user {}'.format(self.user.username)
+
+
+class Comments(models.Model):
+    post = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='comments')
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return 'Comment for {}'.format(self.post.title)

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Movie, Profile
+from .models import Movie, Profile, Comments
 
 
 class NewMovieForm(forms.ModelForm):
@@ -26,6 +26,7 @@ class LoginForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
 
 # Register form
 
@@ -69,3 +70,18 @@ class ProfileEditForm(forms.ModelForm):
         super(ProfileEditForm, self).__init__(*args, **kwargs)
         self.fields['date_of_birth'].widget.attrs.update(
             {'class': 'form-control'})
+
+
+# Не се ползва реших че с raw ще е по-добре.
+class CommentsForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ('post', 'body')
+
+    def __init__(self, *args, **kwargs):
+        super(CommentsForm, self).__init__(*args, **kwargs)
+        self.fields['post'].widget.attrs.update(
+            {'class': 'form-control'})
+        self.fields['body'].widget.attrs.update(
+            {'class': 'form-control'}
+        )

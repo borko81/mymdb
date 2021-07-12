@@ -13,7 +13,7 @@
     </div>
     <p>Година: {{ movies.year }} - {{ movies.runtime }} минути</p>
     <p>{{ movies.plot }}</p>
-    <a href="{{ movies.website }}" target="_blank">Към адреса...</a>
+    <a href="{{ movies.website }}" target="_blank">Към адреса...</a> || <a href="{% url 'movies:comments' movies.id %}" target="_blank">Коментари</a>
     <hr>
     <div class="edit_delete">
         {% include 'core/edit_delete.html' %}

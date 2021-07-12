@@ -1,13 +1,12 @@
-from django.http import HttpResponse
+from core.forms import NewMovieForm, UserEditForm, ProfileEditForm
+from core.models import Movie, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
-from .forms import LoginForm, UserRegistrationForm
-
 from django.shortcuts import get_object_or_404, render, redirect
-from django.views.generic import ListView, DetailView, CreateView
-from core.models import Movie, Profile
-from core.forms import NewMovieForm, UserEditForm, ProfileEditForm
+from django.views.generic import ListView, DetailView
+
+from .forms import LoginForm, UserRegistrationForm, CommentsForm
+from .models import Comments
 
 
 class MovieList(ListView):
@@ -61,9 +60,8 @@ def movie_delete(request, m_id):
         return render(request, 'core/delete_movie.html', context)
     return redirect('movies:user_login')
 
+
 # Login and register technic
-
-
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -104,6 +102,9 @@ def registration(request):
 
 @login_required(login_url='/login')
 def edit(request):
+    """
+    Edit user profile
+    """
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(
@@ -116,4 +117,25 @@ def edit(request):
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
-    return render(request, 'login_register/edit_user_profile.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'login_register/edit_user_profile.html',
+                  {'user_form': user_form, 'profile_form': profile_form})
+
+
+def comments(request, m_id):
+    """
+    Add comments to movie, show only date and body message
+    """
+    if request.user.is_authenticated:
+        context = {}
+        movie = get_object_or_404(Movie, id=m_id)
+        movie_comments = Comments.objects.filter(post=movie)
+        context['movies'] = movie
+        context['comments'] = movie_comments
+        context['form'] = CommentsForm()
+        if request.method == 'GET':
+            return render(request, 'core/comments.html', context)
+        movie_id = request.POST['movie_id']
+        movie_body = request.POST['movie_body']
+        Comments.objects.create(post=Movie.objects.get(id=movie_id), body=movie_body)
+        return redirect('movies:comments', m_id)
+    return redirect('movies:user_login')

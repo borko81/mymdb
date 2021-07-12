@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Detail{% endblock title %}
+{% load static %}
+{% block content %}
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endblock css %}
+
+    <div>
+        <h1>Коментари на потребители</h1>
+        <div class="main_span">
+            <h2 class="h2_title">{{ movies.title }}</h2>
+        </div>
+
+        {% if comments %}
+            {% for comment in comments %}
+                <p>Дата: {{ comment.created_on|date:"d M Y H:m" }} - {{ comment.body }}</p>
+            {% endfor %}
+        {% else %}
+            <p>Няма коментари. Може да добавите първи.</p>
+        {% endif %}
+
+        <hr>
+
+        <form action="{% url 'movies:comments' movies.id %}" method="POST">
+            {% csrf_token %}
+            <label for="movie_name">Име
+                <input type="text" value="{{ movies.title }}" class="form-control input-lg" id="movie_name" disabled name="movie_name">
+            </label>
+            <br>
+            <label for="movie_text_area">Контент
+                <textarea rows="4" cols="100" id="movie_text_area" class="form-control" name="movie_body"></textarea >
+            </label>
+            <input type="hidden" value="{{ movies.id }}" name="movie_id">
+            <input type="submit" value="Запази" class="btn btn-primary form-control">
+        </form>
+
+    </div>
+
+
+{% endblock content %}

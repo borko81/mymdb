@@ -8,7 +8,7 @@ from .views import (
     movie_delete,
     user_login,
     registration,
-    edit,
+    edit, comments,
 )
 app_name = 'movies'
 urlpatterns = [
@@ -17,6 +17,7 @@ urlpatterns = [
     path('create_movie/', movie_create, name='create_movie'),
     path('create_movie/<int:m_id>/', movie_create, name='create_movie'),
     path('delete/<int:m_id>/movie/', movie_delete, name='delete_movie'),
+    path('comments/<int:m_id>/movie/', comments, name='comments'),
 
     # Login and register urls's
     path('login/', user_login, name='user_login'),
