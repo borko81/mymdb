@@ -2,6 +2,7 @@ from core.forms import NewMovieForm, UserEditForm, ProfileEditForm
 from core.models import Movie, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 
@@ -137,6 +138,20 @@ def comments(request, m_id):
         return render(request, 'core/comments.html', context)
     movie_id = request.POST['movie_id']
     movie_body = request.POST['movie_body']
-    Comments.objects.create(post=Movie.objects.get(id=movie_id), body=movie_body)
+    Comments.objects.create(post=Movie.objects.get(id=movie_id), body=movie_body, author=request.user)
     return redirect('movies:comments', m_id)
     # return redirect('movies:user_login')
+
+
+# View profile info from comments template
+def view_profile_info(request, username):
+    search_user = User.objects.get(username=username)
+    context = {}
+    context['username'] = username
+    if search_user.is_superuser:
+        context['info'] = 'super user'
+
+    else:
+        profiles = Profile.objects.filter(user=search_user)[0]
+        context['info'] = profiles
+    return render(request, 'login_register/profile_view.html', context)

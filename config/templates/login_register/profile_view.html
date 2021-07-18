@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}All - Moview {% endblock title %}
+
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+    {{ info }}
+    <div class="movie_list_view">
+        {% if info == 'super user' %}
+            <h5>{{ username }} е профил на суперпотребител, разглеждането на този профил е спряно</h5>
+        {% else %}
+            {% if info.photo %}
+                <img src="{{ info.photo.url }}" alt="">
+            {% else %}
+                Този потребилте все още няма качена снимка
+            {% endif %}
+        {% endif %}
+    </div>
+
+
+
+{% endblock content %}

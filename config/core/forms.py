@@ -76,7 +76,7 @@ class ProfileEditForm(forms.ModelForm):
 class CommentsForm(forms.ModelForm):
     class Meta:
         model = Comments
-        fields = ('post', 'body')
+        fields = ('post', 'body',)
 
     def __init__(self, *args, **kwargs):
         super(CommentsForm, self).__init__(*args, **kwargs)
