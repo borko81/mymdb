@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/core.css' %}">
     {% block css %}{% endblock css %}
     <title>{% block title %}{{ title }}{% endblock title %}</title>
@@ -15,43 +15,27 @@
 
 <body>
 
-    <div class="container">
-        <div class="d-flex justify-content-between">
-            <div>
-                <h2>ФИЛМОВ КАТАЛОГ</h2>
-            </div>
-            <!-- добре дошли {{ request.user }}. Използване https : {{ request.is_secure|yesno }}  -->
-        
-            <div class="ml-auto">
-                {% if user.is_authenticated %}
-                <div class="d-flex">
-                    <a href="{% url 'movies:edit' %}" class="my-0">
-                        <h6 class="my-0">Edit Profile</h6>
-                    </a>&nbsp;&nbsp;
-                    <a href="{% url 'movies:logout' %}?next=/" class="my-0">
-                        <h6 class="my-0">Logout {{ user }}</h6>
-                    </a>
-                </div>
-            {% else %}
-                <a href="{% url 'movies:user_login' %}" class="my-0">
-                    <h6 class="my-0">Login</h6>
-                </a>
-            {% endif %}
-            </div>
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h2>ФИЛМОВ КАТАЛОГ</h2>
         </div>
+        <!-- добре дошли {{ request.user }}. Използване https : {{ request.is_secure|yesno }}  -->
 
-        <div class="row">
-            {% include 'core/right_menu.html' %}
+    </div>
 
-            <div class="col-md-8 order-md-1">
+    <div class="row">
+        {% include 'core/right_menu.html' %}
 
-                {% block content %}
-                    Enter something!!!!!!!!!!!!
-                {% endblock content %}
+        <div class="col-md-8 order-md-1">
 
-            </div>
+            {% block content %}
+                Enter something!!!!!!!!!!!!
+            {% endblock content %}
+
         </div>
     </div>
+</div>
 
 </body>
 

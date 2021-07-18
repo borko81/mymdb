@@ -124,18 +124,19 @@ def edit(request):
 def comments(request, m_id):
     """
     Add comments to movie, show only date and body message
+    Logic to view and add new comment is move to tempalte
     """
-    if request.user.is_authenticated:
-        context = {}
-        movie = get_object_or_404(Movie, id=m_id)
-        movie_comments = Comments.objects.filter(post=movie)
-        context['movies'] = movie
-        context['comments'] = movie_comments
-        context['form'] = CommentsForm()
-        if request.method == 'GET':
-            return render(request, 'core/comments.html', context)
-        movie_id = request.POST['movie_id']
-        movie_body = request.POST['movie_body']
-        Comments.objects.create(post=Movie.objects.get(id=movie_id), body=movie_body)
-        return redirect('movies:comments', m_id)
-    return redirect('movies:user_login')
+    # if request.user.is_authenticated:
+    context = {}
+    movie = get_object_or_404(Movie, id=m_id)
+    movie_comments = Comments.objects.filter(post=movie)
+    context['movies'] = movie
+    context['comments'] = movie_comments
+    context['form'] = CommentsForm()
+    if request.method == 'GET':
+        return render(request, 'core/comments.html', context)
+    movie_id = request.POST['movie_id']
+    movie_body = request.POST['movie_body']
+    Comments.objects.create(post=Movie.objects.get(id=movie_id), body=movie_body)
+    return redirect('movies:comments', m_id)
+    # return redirect('movies:user_login')

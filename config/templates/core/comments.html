@@ -23,18 +23,26 @@
 
         <hr>
 
-        <form action="{% url 'movies:comments' movies.id %}" method="POST">
-            {% csrf_token %}
-            <label for="movie_name">Име
-                <input type="text" value="{{ movies.title }}" class="form-control input-lg" id="movie_name" disabled name="movie_name">
-            </label>
-            <br>
-            <label for="movie_text_area">Контент
-                <textarea rows="4" cols="100" id="movie_text_area" class="form-control" name="movie_body"></textarea >
-            </label>
-            <input type="hidden" value="{{ movies.id }}" name="movie_id">
-            <input type="submit" value="Запази" class="btn btn-primary form-control">
-        </form>
+        {% if user.is_authenticated %}
+            <form action="{% url 'movies:comments' movies.id %}" method="POST">
+                {% csrf_token %}
+                <label for="movie_name">Име
+                    <input type="text" value="{{ movies.title }}" class="form-control input-lg" id="movie_name" disabled
+                           name="movie_name">
+                </label>
+                <br>
+                <label for="movie_text_area">Контент
+                    <textarea rows="4" cols="100" id="movie_text_area" class="form-control"
+                              name="movie_body"></textarea>
+                </label>
+                <input type="hidden" value="{{ movies.id }}" name="movie_id">
+                <input type="submit" value="Запази" class="btn btn-primary form-control">
+            </form>
+        {% else %}
+            <a href="{% url 'movies:user_login' %}" class="my-0"><h5 class="my-0">Трябва да сте логнати за да добавите
+                коментар</h5>
+            </a>
+        {% endif %}
 
     </div>
 
