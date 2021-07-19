@@ -21,10 +21,12 @@
             </a>
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-                <h6 class="my-0">Sort Movie</h6>
-                <small class="text-muted">Показва списък със филмите</small>
-            </div>
+            <a href="{% url 'movies:movie_sorted' %}">
+                <div>
+                    <h6 class="my-0">Most comment Movie</h6>
+                    <small class="text-muted">Показва първите 4 най-коментирани филма</small>
+                </div>
+            </a>
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
             {% if user.is_authenticated %}

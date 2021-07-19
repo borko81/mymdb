@@ -3,11 +3,21 @@ from core.models import Movie, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 
 from .forms import LoginForm, UserRegistrationForm, CommentsForm
-from .models import Comments
+from .models import Comments, get_max_comments
+
+
+def show_movie(request):
+    movie_with_more_comments = get_max_comments()
+    context = {
+        'data': movie_with_more_comments
+    }
+
+    return render(request, 'core/sort_moview_list.html', context)
 
 
 class MovieList(ListView):

@@ -1,6 +1,6 @@
-from django.contrib import auth
 from django.contrib.auth import views as auth_views
 from django.urls import path
+
 from .views import (
     MovieDetail,
     MovieList,
@@ -9,7 +9,9 @@ from .views import (
     user_login,
     registration,
     edit, comments, view_profile_info,
+    show_movie,
 )
+
 app_name = 'movies'
 urlpatterns = [
     path('', MovieList.as_view(), name='all_movie'),
@@ -24,5 +26,8 @@ urlpatterns = [
     path('login/', user_login, name='user_login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('edit/', edit, name='edit'),
-    path('register/', registration, name='registration')
+    path('register/', registration, name='registration'),
+
+    # Test urls
+    path('movie_sorted/', show_movie, name='movie_sorted'),
 ]

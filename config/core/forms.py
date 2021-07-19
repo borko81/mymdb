@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import Movie, Profile, Comments
 
 
+# Form connect to movie models
 class NewMovieForm(forms.ModelForm):
     class Meta:
         model = Movie
@@ -20,7 +21,7 @@ class NewMovieForm(forms.ModelForm):
         }
 
 
-# Login form
+# forms connect to Login form
 class LoginForm(forms.Form):
     username = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -29,8 +30,6 @@ class LoginForm(forms.Form):
 
 
 # Register form
-
-
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
@@ -47,6 +46,7 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password']
 
 
+# Form used to edit user data
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
@@ -61,6 +61,7 @@ class UserEditForm(forms.ModelForm):
         self.fields['email'].widget.attrs.update({'class': 'form-control'})
 
 
+# Form used to edit user profile data
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
@@ -72,7 +73,7 @@ class ProfileEditForm(forms.ModelForm):
             {'class': 'form-control'})
 
 
-# Не се ползва реших че с raw ще е по-добре.
+# Не се ползва реших че с raw ще е по-добре, не съм решил още!
 class CommentsForm(forms.ModelForm):
     class Meta:
         model = Comments

@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 {% block title %}Sorted - Moview {% endblock title %}
-{% block content %} 
+{% block content %}
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Име</th>
+            <th>Година</th>
+            <th>Коментари</th>
+            <th>Към коментарите</th>
+        </tr>
+        </thead>
+        {% for d in data %}
+            <tr>
+                <td>{{ d.title }}</td>
+                <td>{{ d.get_rating_display }}</td>
+                <td>{{ d.comments.count }}</td>
+                <td><a href="{% url 'movies:comments' d.id %}">Info</a></td>
+            </tr>
 
+        {% endfor %}
+    </table>
 {% endblock content %}
