@@ -1,24 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}Detail{% endblock title %}
 {% load static %}
-{% block content %} 
+{% block content %}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
-{% endblock css %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endblock css %}
 
-<div>
-    <div class="main_span">
-        <h2 class="h2_title">{{ movies.title }}</h2> <span class="my_right">Rated: {{ movies.get_rating_display }}</span>
+    <div>
+        <div class="main_span">
+            <h2 class="h2_title">{{ movies.title }}</h2> <span
+                class="my_right">Rated: {{ movies.get_rating_display }}</span>
+        </div>
+        <p>Година: {{ movies.year }} - {{ movies.runtime }} минути</p>
+        <p>{{ movies.plot }}</p>
+        <a href="{{ movies.website }}" target="_blank">Към адреса...</a> ||
+
+        <a href="{% url 'movies:comments' movies.id %}" target="_blank">Коментари</a>
+
+        <hr>
+        <div class="edit_delete">
+            {% if user.is_authenticated and user.id == movies.publisher.id %}
+                <ul>
+                    <li><a href="{% url 'movies:create_movie' movies.id %}">Редакция</a></li>
+                    <li><a href="{% url 'movies:delete_movie' movies.id %}">Изтрии</a></li>
+                </ul>
+            {% endif %}
+        </div>
     </div>
-    <p>Година: {{ movies.year }} - {{ movies.runtime }} минути</p>
-    <p>{{ movies.plot }}</p>
-    <a href="{{ movies.website }}" target="_blank">Към адреса...</a> || <a href="{% url 'movies:comments' movies.id %}" target="_blank">Коментари</a>
-    <hr>
-    <div class="edit_delete">
-        {% include 'core/edit_delete.html' %}
-    </div>
-</div>
 
 
 {% endblock content %}

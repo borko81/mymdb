@@ -9,6 +9,7 @@ class NewMovieForm(forms.ModelForm):
     class Meta:
         model = Movie
         fields = '__all__'
+        exclude = ('publisher', )
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}),

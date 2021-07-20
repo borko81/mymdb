@@ -3,6 +3,7 @@
 from datetime import datetime
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum, Count
 
@@ -28,7 +29,7 @@ class Movie(models.Model):
         (RATED_G, 'G - General Audiences')
     )
 
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, unique=True)
     plot = models.TextField()
     year = models.PositiveIntegerField()
     rating = models.IntegerField(
@@ -37,9 +38,14 @@ class Movie(models.Model):
     runtime = models.PositiveIntegerField()
     website = models.URLField(blank=True)
     image = models.ImageField(upload_to='images', blank=False)
+    publisher = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Title: {self.title}"
+
+    def save(self, *args, **kwargs):
+        self.title = self.title.capitalize()
+        super(Movie, self).save(*args, **kwargs)
 
 
 def get_max_comments():

@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
-{% block title %}All - Moview {% endblock title %}
+{% block title %}All - Movies {% endblock title %}
 
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 {% endblock css %}
 
 {% block content %}
 
 
-<div class="movie_list_view">
-    {% for movie in movies %}
-    <div class="card m_box">
-        <img class="card-img-top" src="{{ movie.image.url }}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{ movie.title }}</h5>
-          <p class="card-text">{{ movie.plot|truncatewords:5 }}</p>
-          <a href="{% url 'movies:detail_movie' movie.pk %}" class="btn btn-primary">Детаили</a>
-        </div>
+    <div class="movie_list_view">
+        {% for movie in movies %}
+            <div class="card m_box">
+                <img class="card-img-top" src="{{ movie.image.url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">{{ movie.plot|truncatewords:5 }}</p>
+                    <a href="{% url 'movies:detail_movie' movie.pk %}" class="btn btn-primary">Детаили</a>
+                </div>
+            </div>
+        {% empty %}
+            Все още няма заглавия
+        {% endfor %}
     </div>
-    {% empty %}
-    Все още няма заглавия
-    {% endfor %}
-</div>
 
 
 

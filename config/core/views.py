@@ -52,7 +52,9 @@ def movie_create(request, m_id=None):
         form = NewMovieForm(request.POST or None,
                             request.FILES or None, instance=movies)
         if form.is_valid():
-            form.save()
+            movie = form.save(commit=False)
+            movie.publisher = request.user
+            movie.save()
             form = NewMovieForm()
             return redirect('movies:all_movie')
         context['form'] = form
@@ -86,10 +88,10 @@ def user_login(request):
                     return redirect('movies:all_movie')
                 else:
                     # return HttpResponse('Disabled account')
-                    return redirect('movies:login')
+                    return redirect('movies:user_login')
             else:
                 # return HttpResponse('Invalid login')
-                return redirect('movies:login')
+                return redirect('movies:user_login')
     else:
         form = LoginForm()
     return render(request, 'login_register/login_page.html', {'form': form})
