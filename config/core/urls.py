@@ -6,9 +6,7 @@ from .views import (
     MovieList,
     movie_create,
     movie_delete,
-    user_login,
-    registration,
-    edit, comments, view_profile_info,
+    comments,
     show_movie,
 )
 
@@ -20,13 +18,13 @@ urlpatterns = [
     path('create_movie/<int:m_id>/', movie_create, name='create_movie'),
     path('delete/<int:m_id>/movie/', movie_delete, name='delete_movie'),
     path('comments/<int:m_id>/movie/', comments, name='comments'),
-    path('profile_info/<str:username>/', view_profile_info, name='profile_info'),
+    # path('profile_info/<str:username>/', view_profile_info, name='profile_info'),
 
     # Login and register urls's
-    path('login/', user_login, name='user_login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('edit/', edit, name='edit'),
-    path('register/', registration, name='registration'),
+    # path('login/', user_login, name='user_login'),
+    # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    # path('edit/', edit, name='edit'),
+    # path('register/', registration, name='registration'),
 
     # Test urls
     path('movie_sorted/', show_movie, name='movie_sorted'),

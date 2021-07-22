@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Movie, Profile, Comments
+from .models import Movie, Comments
 
 
 @admin.register(Movie)
@@ -9,11 +9,11 @@ class MovieAdmin(admin.ModelAdmin):
     list_filter = ('year',)
 
 
-@admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = 'user date_of_birth'.split()
-    list_filter = ('user',)
-    search_fields = ('user', )
+# @admin.register(Profile)
+# class ProfileAdmin(admin.ModelAdmin):
+#     list_display = 'user date_of_birth'.split()
+#     list_filter = ('user',)
+#     search_fields = ('user', )
 
 
 @admin.register(Comments)

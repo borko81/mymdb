@@ -30,18 +30,18 @@
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
             {% if user.is_authenticated %}
-                <a href="{% url 'movies:edit' %}">
+                <a href="{% url 'edit' %}">
                     <div>
                         <h6 class="my-0">Edit Profile</h6>
                     </div>
                 </a>
-                <a href="{% url 'movies:logout' %}?next=/">
+                <a href="{% url 'logout' %}?next=/">
                     <div>
                         <h6 class="my-0">Logout {{ user }}</h6>
                     </div>
                 </a>
             {% else %}
-                <a href="{% url 'movies:user_login' %}">
+                <a href="{% url 'user_login' %}">
                     <div>
                         <h6 class="my-0">Login</h6>
                         <small class="text-muted">контролен панел</small>

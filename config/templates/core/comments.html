@@ -16,7 +16,7 @@
         {% if comments %}
             {% for comment in comments %}
                 <p>Дата: {{ comment.created_on|date:"d M Y H:m" }} - {{ comment.body }}</p>Автор: {{ comment.author }}
-                <a href="{% url 'movies:profile_info' comment.author %}">Info</a>
+                <a href="{% url 'profile_info' comment.author %}">Info</a>
                 <hr>
             {% endfor %}
         {% else %}
@@ -40,7 +40,7 @@
                 <input type="submit" value="Запази" class="btn btn-primary form-control">
             </form>
         {% else %}
-            <a href="{% url 'movies:user_login' %}" class="my-0"><h5 class="my-0">Трябва да сте логнати за да добавите
+            <a href="{% url 'user_login' %}" class="my-0"><h5 class="my-0">Трябва да сте логнати за да добавите
                 коментар</h5>
             </a>
         {% endif %}

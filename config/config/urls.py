@@ -6,6 +6,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='movies')),
+    path('user/', include('auth_and_login.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
