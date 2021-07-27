@@ -2,10 +2,9 @@
 # Import outside module
 from datetime import datetime
 
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Sum, Count
+from django.db.models import Count
 
 
 class Movie(models.Model):
@@ -51,23 +50,6 @@ class Movie(models.Model):
 def get_max_comments():
     """Return first 2 movie with more comments"""
     return Movie.objects.all().annotate(post=Count('comments')).order_by('-post')[:4]
-
-
-# # UserProfile edit
-# class Profile(models.Model):
-#     """
-#     Extend user profile
-#     :onetoone for user
-#     :date_of_birth
-#     :photo for user
-#     """
-#     user = models.OneToOneField(
-#         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     date_of_birth = models.DateField(blank=True, null=True)
-#     photo = models.ImageField(upload_to='users/%Y/%M/%d', blank=True)
-#
-#     def __str__(self) -> str:
-#         return 'Profile for user {}'.format(self.user.username)
 
 
 class Comments(models.Model):
