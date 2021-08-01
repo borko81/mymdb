@@ -45,5 +45,5 @@ class CommentsTestCase(TestCase):
             publisher=author,
         )
         form = CommentsForm(data={'post': m, 'body': 'Super', 'author': author})
-        print(form.errors)
+        # print(form.errors)
         self.assertTrue(form.is_valid())
