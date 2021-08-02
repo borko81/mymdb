@@ -22,10 +22,22 @@ class UserRegistrationForm(forms.ModelForm):
         fields = ('username', 'first_name', 'email')
 
     def clean_password2(self):
+        """
+            Check for corect password
+        """
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Password do not much')
         return cd['password']
+
+    def clean_username(self):
+        """
+            Check for allowed username
+        """
+        data = self.cleaned_data
+        if data['username'].lower() in ['admin', 'root', 'boss']:
+            raise forms.ValidationError('That username not allowed')
+        return data['username']
 
 
 # Form used to edit user data

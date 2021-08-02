@@ -25,6 +25,7 @@ class MovieList(ListView):
     template_name = 'core/all_movies.html'
     model = Movie
     context_object_name = 'movies'
+    paginate_by = 4
 
 
 class MovieDetail(DetailView):
