@@ -1,17 +1,18 @@
-from .forms import NewMovieForm
-from .models import Movie
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 
 from .forms import CommentsForm
+from .forms import NewMovieForm
 from .models import Comments, get_max_comments
+from .models import Movie
 
 
 def show_movie(request):
+    """
+        Return most comments moview
+    """
     movie_with_more_comments = get_max_comments()
     context = {
         'data': movie_with_more_comments
@@ -96,3 +97,7 @@ def comments(request, m_id):
     # return redirect('movies:user_login')
 
 
+class ShowAllUsers(LoginRequiredMixin, ListView):
+    template_name = 'core/show_all_users.html'
+    context_object_name = 'persons'
+    model = User

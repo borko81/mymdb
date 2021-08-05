@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Edit - Movie {% endblock title %}
+{% block content %}
+    {% if persons %}
+        <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Потребителско име</th>
+                <th>Първо име</th>
+                <th>Последно влизане</th>
+                <th>Емеил</th>
+            </tr>
+        </thead>
+        {% for user in persons %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_login|date:'d/m/Y H:i' }}</td>
+                <td>{{ user.email }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+{% endblock content %}
