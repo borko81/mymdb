@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
-from ..forms import NewMovieForm, CommentsForm
-from ..models import Movie
+from ...forms import NewMovieForm, CommentsForm
+from ...models import Movie
 
 testfile = (
     b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00\x21\xf9\x04'

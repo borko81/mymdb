@@ -2,7 +2,7 @@ from django.test import SimpleTestCase
 from django.urls import reverse, resolve
 
 # py manage.py test core/tests
-from ..views import MovieList, MovieDetail, movie_create, movie_delete
+from ...views import MovieList, MovieDetail, movie_create, movie_delete
 
 
 class TestUrls(SimpleTestCase):

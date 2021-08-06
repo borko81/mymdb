@@ -30,7 +30,7 @@ class MovieList(ListView):
 
 
 class MovieDetail(DetailView):
-    """ Return detail from choiced movie """
+    """ Return detail from choice movie """
     template_name = 'core/detail_movie.html'
     model = Movie
     context_object_name = 'movies'

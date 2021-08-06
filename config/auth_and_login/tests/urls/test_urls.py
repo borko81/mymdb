@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve
 
-from ..views import user_login, registration, edit
+from ...views import user_login, registration, edit
 
 
 class TestLoginRegisterUrl(SimpleTestCase):
