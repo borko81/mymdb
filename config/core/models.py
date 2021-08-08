@@ -48,7 +48,7 @@ class Movie(models.Model):
 
 
 def get_max_comments():
-    """Return first 2 movie with more comments"""
+    """Return first 4 movie with more comments"""
     return Movie.objects.all().annotate(post=Count('comments')).order_by('-post')[:4]
 
 

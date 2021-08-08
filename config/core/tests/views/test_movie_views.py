@@ -27,7 +27,7 @@ class TestMovieViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'core/all_movies.html')
 
-    def test_show_movie_details_when_user_is_corect_return_data(self):
+    def test_show_movie_details_when_user_is_correct_return_data(self):
         response = self.client.get(reverse('movies:detail_movie', args=[1]))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Movie.objects.all()[0].plot, 'Some magic plot')

@@ -11,7 +11,7 @@ from .models import Movie
 
 def show_movie(request):
     """
-        Return most comments moview
+        Return most comments movies
     """
     movie_with_more_comments = get_max_comments()
     context = {
