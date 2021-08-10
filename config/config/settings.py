@@ -72,13 +72,25 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'imbd',
+#         'USER': 'postgres',
+#         'PASSWORD': 'korea60',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'imbd',
-        'USER': 'postgres',
-        'PASSWORD': 'korea60',
-        'HOST': '127.0.0.1',
+        'NAME': 'd4cqqjs3r64b2m',
+        'USER': 'peyzlynhmsntpr',
+        'PASSWORD': '9e499d7abb1a8f5d6e705a977f7bf89bb7cfdd45c1cf77d2cf1e5ae76356d490',
+        'HOST': 'ec2-52-30-81-192.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
