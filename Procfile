@@ -1,1 +1,2 @@
-web: gunicorn config.wsgi --log-file -
+web: gunicorn mymdb.wsgi --log-file -
+release: python manage.py migrate
