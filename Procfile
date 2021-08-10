@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath mymdb config.wsgi --log-file -
+web gunicorn --pythonpath config config.wsgi --log-file -
