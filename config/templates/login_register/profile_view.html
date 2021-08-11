@@ -13,6 +13,7 @@
         {% if info == 'super user' %}
             <h5>{{ username }} е профил на суперпотребител, разглеждането на този профил е спряно</h5>
         {% else %}
+            <p>Email: {{ info.user.email|default:"Потребителя няма въведен емеил адрес" }}</p><br />
             {% if info.photo %}
                 <img src="{{ info.photo.url }}" alt="">
             {% else %}
