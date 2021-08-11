@@ -63,7 +63,7 @@ class Comments(models.Model):
 
     class Meta:
         """Sorting movie, new is first"""
-        ordering = ['-created_on']
+        ordering = ['created_on']
 
     def __str__(self):
         return 'Comment for {}'.format(self.post.title)
