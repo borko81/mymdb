@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 import os
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -173,6 +174,13 @@ LOGOUT_URL = 'logout'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+cloudinary.config(
+  cloud_name = "dxadco8l8",
+  api_key = "133559243489947",
+  api_secret = "DvjjWAu_oVPsuXnjL4A4YVSLwsk"
+)
+
 
 import django_heroku
 django_heroku.settings(locals())

@@ -1,6 +1,7 @@
 # import django needed module's
 # Import outside module
 from datetime import datetime
+from cloudinary import models as cloudinary_models
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -36,7 +37,10 @@ class Movie(models.Model):
     )
     runtime = models.PositiveIntegerField()
     website = models.URLField(blank=True)
-    image = models.ImageField(upload_to='images', blank=False)
+    image = cloudinary_models.CloudinaryField(
+        resource_type='image',
+        blank=False
+    )
     publisher = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
